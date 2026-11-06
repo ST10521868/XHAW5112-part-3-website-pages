@@ -1,0 +1,450 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adventure Escape SA | Individual Travel & Custom Trip Builder</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              navy: {
+                800: '#213d4c',
+                900: '#1b303f',
+                950: '#121f27',
+              },
+              peach: {
+                DEFAULT: '#f0b169',
+                dark: '#dd9b4c',
+                light: '#fdf2e5',
+              },
+              sand: {
+                DEFAULT: '#f5f1eb',
+                light: '#fbf9f6',
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+      .bg-hero-gradient {
+        background: linear-gradient(rgba(18, 31, 39, 0.78), rgba(18, 31, 39, 0.88)),
+          url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      }
+      .scrollbar-none::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-none {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .option-card.selected {
+        border-color: #f0b169 !important;
+        background-color: #fdf2e5 !important;
+        box-shadow: 0 0 0 2px #f0b169;
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-b from-[#f7f3ee] via-[#f3f6f5] to-[#ecefeea4] text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-peach selection:text-navy-950">
+
+    <!-- SINGLE STICKY HEADER NAVBAR -->
+    <header class="sticky top-0 z-50 bg-navy-800/95 backdrop-blur-md shadow-lg border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <!-- Brand Logo -->
+        <a href="#hero" onclick="switchView('individual')" class="flex flex-col group cursor-pointer">
+          <span class="font-serif text-2xl font-bold tracking-tight text-white group-hover:text-peach transition duration-200">Adventure</span>
+          <span class="text-[10px] tracking-widest text-peach font-bold uppercase -mt-1">ESCAPE SA</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Main navigation">
+          <a href="home.html" class="text-gray-300 hover:text-white transition">Home</a>
+          <a href="overview.html" class="text-gray-300 hover:text-white transition">Overview</a>
+          <a href="individual.html" class="text-peach font-semibold relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-peach">Individual</a>
+          <a href="fees.html" class="text-gray-300 hover:text-white transition">Fees</a>
+          <a href="about.html" class="text-gray-300 hover:text-white transition">About</a>
+          <a href="contact.html" class="text-gray-300 hover:text-white transition">Contact</a>
+        </nav>
+
+        <!-- CTA Action Buttons -->
+        <div class="flex items-center gap-3">
+          <button onclick="bookNowToFees('Custom Adventure Booking', 0, 'Selected activity', 'Custom')" class="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs font-bold text-navy-950 bg-peach hover:bg-peach-dark transition shadow-lg shadow-peach/20 uppercase tracking-wider">
+            <i class="fa-solid fa-calculator mr-2"></i> Fees Calculator
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="grow">
+      
+      <!-- INDIVIDUAL ACTIVITIES VIEW -->
+      <div id="view-individual" class="view-panel space-y-12">
+        <!-- HERO SECTION -->
+        <section id="hero" class="relative bg-hero-gradient py-20 lg:py-24 text-white">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="inline-block px-3.5 py-1 bg-peach/20 border border-peach/40 rounded-full text-peach font-semibold text-xs tracking-wider uppercase mb-4 backdrop-blur-md">
+              Individual Travel Experiences
+            </span>
+            <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight max-w-3xl mx-auto leading-tight">
+              Choose a trip that matches your pace and energy.
+            </h1>
+            <p class="mt-4 text-gray-300 text-base sm:text-lg max-w-2xl mx-auto font-light">
+              Click "Book Now!!" on any activity to calculate exact fees, party sizes, and customized add-ons.
+            </p>
+
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <button onclick="switchView('fees')" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-peach hover:bg-peach-dark text-xs font-bold text-navy-950 transition shadow-xl shadow-peach/20 uppercase tracking-wider">
+                <i class="fa-solid fa-calculator"></i> Calculate Custom Fees
+              </button>
+              <a href="#catalog" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-semibold text-white transition backdrop-blur-sm">
+                <i class="fa-solid fa-compass"></i> Explore Activities Below
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- FEATURE HIGHLIGHT PILLS -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="flex items-center gap-4 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-lg border border-gray-100">
+              <div class="w-12 h-12 rounded-xl bg-peach/20 text-navy-800 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-user-shield text-peach-dark text-lg"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-navy-900 text-sm">Expert Local Guides</h4>
+                <p class="text-xs text-gray-500">Certified safety and deep terrain knowledge</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-lg border border-gray-100">
+              <div class="w-12 h-12 rounded-xl bg-peach/20 text-navy-800 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-users-rectangle text-peach-dark text-lg"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-navy-900 text-sm">Small-Group and Solo Travel</h4>
+                <p class="text-xs text-gray-500">Tailored non-crowded trips for your party</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-2xl shadow-lg border border-gray-100">
+              <div class="w-12 h-12 rounded-xl bg-peach/20 text-navy-800 flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-sliders text-peach-dark text-lg"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-navy-900 text-sm">Transparent Fees</h4>
+                <p class="text-xs text-gray-500">Instant price estimate with customizable add-ons</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACTIVITIES CATALOG & FILTER SECTION -->
+        <section id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="text-xs font-bold text-peach-dark uppercase tracking-widest">Selected Tours</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-navy-900 mt-1">Explore Individual Trips</h2>
+            <p class="text-gray-600 text-sm mt-2">Click <strong>"Book Now"</strong> on any tour to calculate exact fees and proceed to booking details.</p>
+          </div>
+
+          <!-- Filter Bar -->
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 sm:px-6 rounded-2xl shadow-sm border border-gray-200/80 mb-8">
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
+              <span class="text-xs font-bold text-gray-500 uppercase tracking-wider shrink-0 mr-2">Filter:</span>
+              <button onclick="filterActivities('All', this)" class="filter-btn active px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-navy-800 text-white transition">All</button>
+              <button onclick="filterActivities('Hiking', this)" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Hiking</button>
+              <button onclick="filterActivities('Kayaking', this)" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Kayaking</button>
+              <button onclick="filterActivities('Zip-lining', this)" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Zip-lining</button>
+              <button onclick="filterActivities('Rock Climbing', this)" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Rock Climbing</button>
+              <button onclick="filterActivities('Mountain Biking', this)" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Mountain Biking</button>
+              <button onclick="filterActivities('Rafting', this)" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Rafting</button>
+            </div>
+
+            <div class="text-xs font-medium text-gray-500 shrink-0 self-end md:self-center" id="activity-count">
+              6 activities found
+            </div>
+          </div>
+
+          <!-- Cards Grid -->
+          <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- CARD 1 -->
+            <article class="activity-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group" data-category="Hiking">
+              <div>
+                <div class="relative h-56 overflow-hidden bg-gray-100">
+                  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800" alt="Table Mountain Trail Hike" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                  <span class="absolute top-3 left-3 bg-peach text-navy-950 font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-md shadow-sm">Hiking</span>
+                  <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-navy-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">From R150</span>
+                </div>
+                <div class="p-6">
+                  <h3 class="font-serif text-xl font-bold text-navy-900 mb-2 group-hover:text-peach-dark transition">Table Mountain Trail Hike</h3>
+                  <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
+                    <i class="fa-solid fa-location-dot text-peach-dark"></i>
+                    <span>Cape Town & Peninsula</span>
+                  </div>
+                  <div class="flex items-center gap-2 mb-4">
+                    <span class="inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md font-medium"><i class="fa-regular fa-clock text-gray-400"></i> 4–6 hours</span>
+                    <span class="inline-flex items-center text-xs text-amber-800 bg-amber-100 px-2.5 py-1 rounded-md font-semibold">Moderate</span>
+                  </div>
+                  <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">Experience Table Mountain on foot with certified guides offering panoramic Atlantic ocean views.</p>
+                </div>
+              </div>
+              <div class="p-6 pt-0 grid grid-cols-2 gap-3 mt-4">
+                <button onclick="bookNowToFees('Table Mountain Trail Hike', 150, 'Cape Town & Peninsula', 'Hiking')" class="bg-navy-800 hover:bg-navy-950 text-white font-bold text-xs py-2.5 rounded-lg transition text-center shadow-sm uppercase tracking-wider flex items-center justify-center gap-1.5">
+                  Book Now <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </button>
+                <button onclick="openDetailsModal('Table Mountain Trail Hike', 'Experience Table Mountain on foot with certified guides. Explore diverse flora and breathtaking Atlantic sea views.', 'R150', 'Cape Town & Peninsula', '4-6 hours', 'Moderate')" class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 rounded-lg transition text-center">
+                  Learn More
+                </button>
+              </div>
+            </article>
+
+            <!-- CARD 2 -->
+            <article class="activity-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group" data-category="Kayaking">
+              <div>
+                <div class="relative h-56 overflow-hidden bg-gray-100">
+                  <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800" alt="Knysna Lagoon Kayak Tour" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                  <span class="absolute top-3 left-3 bg-peach text-navy-950 font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-md shadow-sm">Kayaking</span>
+                  <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-navy-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">From R280</span>
+                </div>
+                <div class="p-6">
+                  <h3 class="font-serif text-xl font-bold text-navy-900 mb-2 group-hover:text-peach-dark transition">Knysna Lagoon Kayak Tour</h3>
+                  <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
+                    <i class="fa-solid fa-location-dot text-peach-dark"></i>
+                    <span>Knysna / Garden Route</span>
+                  </div>
+                  <div class="flex items-center gap-2 mb-4">
+                    <span class="inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md font-medium"><i class="fa-regular fa-clock text-gray-400"></i> 2–3 hours</span>
+                    <span class="inline-flex items-center text-xs text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-md font-semibold">Easy</span>
+                  </div>
+                  <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">Paddle through calm turquoise lagoon waters surrounded by lush indigenous forest and dramatic cliffs.</p>
+                </div>
+              </div>
+              <div class="p-6 pt-0 grid grid-cols-2 gap-3 mt-4">
+                <button onclick="bookNowToFees('Knysna Lagoon Kayak Tour', 280, 'Knysna / Garden Route', 'Kayaking')" class="bg-navy-800 hover:bg-navy-950 text-white font-bold text-xs py-2.5 rounded-lg transition text-center shadow-sm uppercase tracking-wider flex items-center justify-center gap-1.5">
+                  Book Now <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </button>
+                <button onclick="openDetailsModal('Knysna Lagoon Kayak Tour', 'Paddle through serene coastal estuaries and marine protected areas. Great for families and birdwatchers.', 'R280', 'Knysna / Garden Route', '2-3 hours', 'Easy')" class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 rounded-lg transition text-center">
+                  Learn More
+                </button>
+              </div>
+            </article>
+
+            <!-- CARD 3 -->
+            <article class="activity-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group" data-category="Zip-lining">
+              <div>
+                <div class="relative h-56 overflow-hidden bg-gray-100">
+                  <img src="https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?auto=format&fit=crop&q=80&w=800" alt="Tsitsikamma Forest Zip-line" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                  <span class="absolute top-3 left-3 bg-peach text-navy-950 font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-md shadow-sm">Zip-lining</span>
+                  <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-navy-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">From R450</span>
+                </div>
+                <div class="p-6">
+                  <h3 class="font-serif text-xl font-bold text-navy-900 mb-2 group-hover:text-peach-dark transition">Tsitsikamma Forest Zip-line</h3>
+                  <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
+                    <i class="fa-solid fa-location-dot text-peach-dark"></i>
+                    <span>Tsitsikamma Canopy</span>
+                  </div>
+                  <div class="flex items-center gap-2 mb-4">
+                    <span class="inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md font-medium"><i class="fa-regular fa-clock text-gray-400"></i> 3 hours</span>
+                    <span class="inline-flex items-center text-xs text-emerald-800 bg-emerald-100 px-2.5 py-1 rounded-md font-semibold">Easy</span>
+                  </div>
+                  <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">Soar through the ancient forest canopy on interconnected zip-lines with breathtaking gorge views.</p>
+                </div>
+              </div>
+              <div class="p-6 pt-0 grid grid-cols-2 gap-3 mt-4">
+                <button onclick="bookNowToFees('Tsitsikamma Forest Zip-line', 450, 'Tsitsikamma Canopy', 'Zip-lining')" class="bg-navy-800 hover:bg-navy-950 text-white font-bold text-xs py-2.5 rounded-lg transition text-center shadow-sm uppercase tracking-wider flex items-center justify-center gap-1.5">
+                  Book Now <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </button>
+                <button onclick="openDetailsModal('Tsitsikamma Forest Zip-line', 'Glide up to 30 meters above the forest floor with certified safety instructors.', 'R450', 'Tsitsikamma Canopy', '3 hours', 'Easy')" class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 rounded-lg transition text-center">
+                  Learn More
+                </button>
+              </div>
+            </article>
+
+            <!-- CARD 4 -->
+            <article class="activity-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group" data-category="Rock Climbing">
+              <div>
+                <div class="relative h-56 overflow-hidden bg-gray-100">
+                  <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&q=80&w=800" alt="Cederberg Rock Climbing" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                  <span class="absolute top-3 left-3 bg-peach text-navy-950 font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-md shadow-sm">Rock Climbing</span>
+                  <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-navy-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">From R200</span>
+                </div>
+                <div class="p-6">
+                  <h3 class="font-serif text-xl font-bold text-navy-900 mb-2 group-hover:text-peach-dark transition">Cederberg Rock Climbing</h3>
+                  <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
+                    <i class="fa-solid fa-location-dot text-peach-dark"></i>
+                    <span>Cederberg Wilderness</span>
+                  </div>
+                  <div class="flex items-center gap-2 mb-4">
+                    <span class="inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md font-medium"><i class="fa-regular fa-clock text-gray-400"></i> Full day</span>
+                    <span class="inline-flex items-center text-xs text-rose-800 bg-rose-100 px-2.5 py-1 rounded-md font-semibold">Challenging</span>
+                  </div>
+                  <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">Scale world-renowned sandstone formations in the Cederberg with expert belayers and full safety gear.</p>
+                </div>
+              </div>
+              <div class="p-6 pt-0 grid grid-cols-2 gap-3 mt-4">
+                <button onclick="bookNowToFees('Cederberg Rock Climbing', 200, 'Cederberg Wilderness', 'Rock Climbing')" class="bg-navy-800 hover:bg-navy-950 text-white font-bold text-xs py-2.5 rounded-lg transition text-center shadow-sm uppercase tracking-wider flex items-center justify-center gap-1.5">
+                  Book Now <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </button>
+                <button onclick="openDetailsModal('Cederberg Rock Climbing', 'Climb world famous orange sandstone crags in Rocklands. Includes gear rental, harness, chalk, belayers.', 'R200', 'Cederberg Wilderness', 'Full day', 'Challenging')" class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 rounded-lg transition text-center">
+                  Learn More
+                </button>
+              </div>
+            </article>
+
+            <!-- CARD 5 -->
+            <article class="activity-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group" data-category="Mountain Biking">
+              <div>
+                <div class="relative h-56 overflow-hidden bg-gray-100">
+                  <img src="data:image/webp;base64,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" alt="Mountain biker riding a trail in the Cape Winelands" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                  <span class="absolute top-3 left-3 bg-peach text-navy-950 font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-md shadow-sm">Mountain Biking</span>
+                  <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-navy-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">From R350</span>
+                </div>
+                <div class="p-6">
+                  <h3 class="font-serif text-xl font-bold text-navy-900 mb-2 group-hover:text-peach-dark transition">Cape Winelands Mountain Bike</h3>
+                  <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
+                    <i class="fa-solid fa-location-dot text-peach-dark"></i>
+                    <span>Cape Winelands</span>
+                  </div>
+                  <div class="flex items-center gap-2 mb-4">
+                    <span class="inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md font-medium"><i class="fa-regular fa-clock text-gray-400"></i> 4–5 hours</span>
+                    <span class="inline-flex items-center text-xs text-amber-800 bg-amber-100 px-2.5 py-1 rounded-md font-semibold">Moderate</span>
+                  </div>
+                  <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">Ride through rolling vineyard scenery, forest single-tracks, and high-country paths tailored for cyclists.</p>
+                </div>
+              </div>
+              <div class="p-6 pt-0 grid grid-cols-2 gap-3 mt-4">
+                <button onclick="bookNowToFees('Cape Winelands Mountain Bike', 350, 'Cape Winelands', 'Mountain Biking')" class="bg-navy-800 hover:bg-navy-950 text-white font-bold text-xs py-2.5 rounded-lg transition text-center shadow-sm uppercase tracking-wider flex items-center justify-center gap-1.5">
+                  Book Now <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </button>
+                <button onclick="openDetailsModal('Cape Winelands Mountain Bike', 'Dual-suspension bikes included. Ride through Stellenbosch valleys with optional wine tasting stops.', 'R350', 'Cape Winelands', '4-5 hours', 'Moderate')" class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 rounded-lg transition text-center">
+                  Learn More
+                </button>
+              </div>
+            </article>
+
+            <!-- CARD 6 -->
+            <article class="activity-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group" data-category="Rafting">
+              <div>
+                <div class="relative h-56 overflow-hidden bg-gray-100">
+                  <img src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&q=80&w=800" alt="Orange River Rafting" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                  <span class="absolute top-3 left-3 bg-peach text-navy-950 font-bold text-[10px] tracking-wider uppercase px-3 py-1 rounded-md shadow-sm">Rafting</span>
+                  <span class="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-navy-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-md">From R620</span>
+                </div>
+                <div class="p-6">
+                  <h3 class="font-serif text-xl font-bold text-navy-900 mb-2 group-hover:text-peach-dark transition">Orange River Rafting</h3>
+                  <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-4">
+                    <i class="fa-solid fa-location-dot text-peach-dark"></i>
+                    <span>Orange River Gorge</span>
+                  </div>
+                  <div class="flex items-center gap-2 mb-4">
+                    <span class="inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md font-medium"><i class="fa-regular fa-clock text-gray-400"></i> Full day</span>
+                    <span class="inline-flex items-center text-xs text-rose-800 bg-rose-100 px-2.5 py-1 rounded-md font-semibold">Challenging</span>
+                  </div>
+                  <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">Navigate thundering rapids through the dramatic Augrabies Gorge with guided river expeditions.</p>
+                </div>
+              </div>
+              <div class="p-6 pt-0 grid grid-cols-2 gap-3 mt-4">
+                <button onclick="bookNowToFees('Orange River Rafting', 620, 'Orange River Gorge', 'Rafting')" class="bg-navy-800 hover:bg-navy-950 text-white font-bold text-xs py-2.5 rounded-lg transition text-center shadow-sm uppercase tracking-wider flex items-center justify-center gap-1.5">
+                  Book Now <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </button>
+                <button onclick="openDetailsModal('Orange River Rafting', 'Navigate exciting rapids through Augrabies Gorge. Multi-day wilderness camping options available.', 'R620', 'Orange River Gorge', 'Full day', 'Challenging')" class="border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold text-xs py-2.5 rounded-lg transition text-center">
+                  Learn More
+                </button>
+              </div>
+            </article>
+
+          </div>
+        </section>
+      </div>
+
+    <script>
+      function switchView(viewId) {
+        const pages = {
+          home: 'home.html',
+          overview: 'overview.html',
+          individual: 'individual.html',
+          fees: 'fees.html',
+          about: 'about.html',
+          contact: 'contact.html'
+        };
+
+        const target = pages[viewId];
+        if (target) {
+          window.location.href = target;
+        }
+      }
+
+      function filterActivities(category, btnElement) {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach((btn) => {
+          btn.classList.remove('bg-navy-800', 'text-white');
+          btn.classList.add('bg-gray-100', 'text-gray-700');
+        });
+
+        btnElement.classList.remove('bg-gray-100', 'text-gray-700');
+        btnElement.classList.add('bg-navy-800', 'text-white');
+
+        const cards = document.querySelectorAll('.activity-card');
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const cardCategory = card.getAttribute('data-category');
+          if (category === 'All' || cardCategory === category) {
+            card.style.display = 'flex';
+            visibleCount += 1;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        const counter = document.getElementById('activity-count');
+        if (counter) {
+          counter.textContent = `${visibleCount} activities found`;
+        }
+      }
+
+      function bookNowToFees(title, basePrice, location, category) {
+        const params = new URLSearchParams({
+          trip: title,
+          price: String(basePrice),
+          location: location || 'Custom itinerary',
+          category: category || 'Custom'
+        });
+        window.location.href = `fees.html?${params.toString()}`;
+      }
+
+      function openDetailsModal(title, description, price, location, duration, difficulty) {
+        const summary = [
+          title,
+          '',
+          `Location: ${location}`,
+          `Duration: ${duration}`,
+          `Difficulty: ${difficulty}`,
+          '',
+          description,
+          '',
+          `Starting from ${price}`
+        ].join('\n');
+        window.alert(summary);
+      }
+    </script>
+  </body>
+</html>

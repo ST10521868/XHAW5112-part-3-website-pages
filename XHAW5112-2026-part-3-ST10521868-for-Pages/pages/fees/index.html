@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adventure Escape SA | Fees & Packages Calculator</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              navy: {
+                800: '#213d4c',
+                900: '#1b303f',
+                950: '#121f27',
+              },
+              peach: {
+                DEFAULT: '#f0b169',
+                dark: '#dd9b4c',
+                light: '#fdf2e5',
+              },
+              sand: '#f5f1eb',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+          },
+        },
+      };
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+      .bg-hero-gradient {
+        background: linear-gradient(rgba(18, 31, 39, 0.75), rgba(18, 31, 39, 0.85)),
+          url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      }
+      .app-view {
+        display: none;
+      }
+      .app-view.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-b from-[#f7f3ee] to-[#f1f5f4] text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+    <header class="sticky top-0 z-50 bg-navy-800/95 backdrop-blur-md shadow-lg border-b border-white/15">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <a href="../home.html" class="flex flex-col group cursor-pointer">
+          <span class="font-serif text-2xl font-bold tracking-tight text-white group-hover:text-peach transition">Adventure</span>
+          <span class="text-[10px] tracking-widest text-peach font-bold uppercase -mt-1">ESCAPE SA</span>
+        </a>
+
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium" aria-label="Main navigation">
+          <a href="../home.html" class="text-gray-300 hover:text-white transition">Home</a>
+          <a href="../overview.html" class="text-gray-300 hover:text-white transition">Overview</a>
+          <a href="../individual.html" class="text-gray-300 hover:text-white transition">Individual</a>
+          <a href="../fees.html" class="text-peach font-semibold transition pb-1 border-b-2 border-peach">Fees</a>
+          <a href="../about.html" class="text-gray-300 hover:text-white transition">About</a>
+          <a href="../contact.html" class="text-gray-300 hover:text-white transition">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+          <a href="../contact.html" class="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs font-bold text-navy-950 bg-peach hover:bg-peach-dark transition shadow-lg shadow-peach/20 uppercase tracking-wider">
+            Book now
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="grow">
+      <section id="view-fees" class="app-view active">
+        <div class="relative bg-hero-gradient py-20 lg:py-28 text-white">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="inline-block px-3 py-1 bg-peach/20 border border-peach/30 rounded-full text-peach font-semibold text-xs tracking-wider uppercase mb-4">Pricing & Packages</span>
+            <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight max-w-3xl mx-auto leading-tight">Simple pricing for memorable escapes.</h1>
+            <p class="mt-4 text-gray-300 text-base sm:text-lg max-w-2xl mx-auto">Select any package below to instantly load it into our live fee calculator and customize your journey.</p>
+          </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20 mb-16">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <article class="bg-white rounded-3xl shadow-xl border border-gray-200/80 p-8 flex flex-col justify-between transition hover:-translate-y-1">
+              <div>
+                <span class="text-xs font-bold text-peach-dark uppercase tracking-widest">Standard Tier</span>
+                <h3 class="font-serif text-2xl font-bold text-navy-900 mt-1 mb-4">Day Escape</h3>
+                <div class="flex items-baseline gap-1 mb-6">
+                  <strong class="text-4xl font-bold text-navy-900">R850</strong>
+                  <span class="text-xs text-gray-500 font-medium">/ person</span>
+                </div>
+                <ul class="space-y-3 text-sm text-gray-600 mb-8 border-t border-gray-100 pt-6">
+                  <li class="flex items-center gap-2"><i class="fa-solid fa-check text-peach-dark"></i> Half-day guided route</li>
+                  <li class="flex items-center gap-2"><i class="fa-solid fa-check text-peach-dark"></i> Transport pickup included</li>
+                  <li class="flex items-center gap-2"><i class="fa-solid fa-check text-peach-dark"></i> Light refreshments & water</li>
+                </ul>
+              </div>
+              <button onclick="selectPackage('Day Escape', 850, 1)" class="w-full bg-navy-800 hover:bg-navy-950 text-white font-bold py-3.5 px-4 rounded-xl transition text-center text-xs uppercase tracking-wider shadow-md">
+                Select & Calculate Fee
+              </button>
+            </article>
+
+            <article class="bg-navy-900 text-white rounded-3xl shadow-2xl border-2 border-peach p-8 flex flex-col justify-between transform md:-translate-y-4">
+              <div>
+                <span class="inline-block px-3 py-1 bg-peach text-navy-950 font-bold text-[10px] tracking-widest uppercase rounded-full mb-3">Most Popular</span>
+                <h3 class="font-serif text-2xl font-bold text-white mb-4">Weekend Escape</h3>
+                <div class="flex items-baseline gap-1 mb-6">
+                  <strong class="text-4xl font-bold text-peach">R2,350</strong>
+                  <span class="text-xs text-gray-300 font-medium">/ person</span>
+                </div>
+                <ul class="space-y-3 text-sm text-gray-300 mb-8 border-t border-white/10 pt-6">
+                  <li class="flex items-center gap-2"><i class="fa-solid fa-check text-peach"></i> 2-day immersive experience</li>
+                  <li class="flex items-center gap-2"><i class="fa-solid fa-check text-peach"></i> Lodge accommodation included</li>
+                  <li class="flex items-center gap-2"><i class="fa-solid fa-check text-peach"></i> All meals and local guide support</li>
+                </ul>
+              </div>
+              <button onclick="selectPackage('Weekend Escape', 2350, 2)" class="w-full bg-peach hover:bg-peach-dark text-navy-950 font-bold py-3.5 px-4 rounded-xl transition text-center text-xs uppercase tracking-wider shadow-lg">
+                Select & Calculate Fee
+              </button>
+            </article>
+
+            <article class="bg-white rounded-3xl shadow-xl border border-gray-200/80 p-8 flex flex-col justify-between transition hover:-translate-y-1">
+              <div>
+                <span class="text-xs font-bold text-peach-dark uppercase tracking-widest">VIP Group Tier</span>
+                <h3 class="font-serif text-2xl font-bold text-navy-900 mt-1 mb-4">Private Group</h3>
+                <div class="flex items-baseline gap-1 mb-6">
+                  <span class="text-xs text-gray-500 font-medium mr-1">from</span>
+                  <strong class="text-4xl font-bold text-navy-900">R5,900</strong>
+                  <span class="text-xs text-gray-500 font-medium">/ group</span>
+                </div>
+                <ul class="space-y-3 text-sm text-gray-600 mb-8 border-t border-gray-100 pt-6">
+                  <li class="flex items-center gap-2"><i class="fa-solid fa-check text-peach-dark"></i> Custom route planning</li>
+                  <li class="flex items-center gap-2"><i class="fa-solid fa-check text-peach-dark"></i> Dedicated private coordinator</li>
+                  <li class="flex items-center gap-2"><i class="fa-solid fa-check text-peach-dark"></i> Fully flexible itinerary & schedule</li>
+                </ul>
+              </div>
+              <button onclick="selectPackage('Private Group', 5900, 4)" class="w-full bg-navy-800 hover:bg-navy-950 text-white font-bold py-3.5 px-4 rounded-xl transition text-center text-xs uppercase tracking-wider shadow-md">
+                Select & Calculate Fee
+              </button>
+            </article>
+          </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+          <div class="bg-white rounded-3xl shadow-xl border border-gray-200/80 p-6 sm:p-10">
+            <div class="text-center mb-8">
+              <span class="text-xs font-bold text-peach-dark uppercase tracking-widest">Interactive Estimator</span>
+              <h2 class="font-serif text-3xl font-bold text-navy-900 mt-1">Live Fee Calculation</h2>
+              <p class="text-gray-600 text-sm mt-1">Adjust party size, dates, and optional add-ons below.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="space-y-6">
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">Selected Package / Adventure</label>
+                  <select id="calc-package" onchange="updateCalculation()" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm font-semibold text-navy-900 focus:outline-none focus:ring-2 focus:ring-peach">
+                    <option value="Day Escape" data-price="850">Day Escape (R850 p.p.)</option>
+                    <option value="Weekend Escape" data-price="2350">Weekend Escape (R2,350 p.p.)</option>
+                    <option value="Private Group" data-price="5900">Private Group (R5,900 flat)</option>
+                  </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">Number of Guests</label>
+                    <input type="number" id="calc-guests" min="1" max="30" value="2" onchange="updateCalculation()" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-sm font-semibold text-navy-900 focus:outline-none focus:ring-2 focus:ring-peach">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">Preferred Date</label>
+                    <input type="date" id="calc-date" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-3 text-sm font-semibold text-navy-900 focus:outline-none focus:ring-2 focus:ring-peach">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">Optional Add-ons</label>
+                  <div class="space-y-2 text-sm">
+                    <label class="flex items-center gap-3 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                      <input type="checkbox" id="addon-shuttle" onchange="updateCalculation()" class="w-4 h-4 text-navy-800 rounded accent-navy-800">
+                      <span>Private Hotel Shuttle Transfer (+R250)</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 rounded-xl border border-gray-200 hover:bg-gray-50 cursor-pointer">
+                      <input type="checkbox" id="addon-gear" onchange="updateCalculation()" class="w-4 h-4 text-navy-800 rounded accent-navy-800">
+                      <span>Pro Action Gear & Rental (+R180 / person)</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-navy-900 text-white rounded-2xl p-6 flex flex-col justify-between shadow-inner">
+                <div>
+                  <h3 class="font-serif text-lg font-bold text-peach mb-4 pb-2 border-b border-white/10">Fee Quote Summary</h3>
+                  <div class="space-y-3 text-sm">
+                    <div class="flex justify-between text-gray-300">
+                      <span id="summary-pkg-name">Day Escape</span>
+                      <span id="summary-base-total">R1,700</span>
+                    </div>
+                    <div class="flex justify-between text-gray-300">
+                      <span>Guests</span>
+                      <span id="summary-guests-count">2 Explorers</span>
+                    </div>
+                    <div class="flex justify-between text-gray-300">
+                      <span>Add-ons Total</span>
+                      <span id="summary-addons-total">R0</span>
+                    </div>
+                    <div class="flex justify-between text-gray-300 text-xs pt-2 border-t border-white/10">
+                      <span>VAT (15% Included)</span>
+                      <span id="summary-vat">R255.00</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-8 pt-4 border-t border-white/15">
+                  <div class="flex items-center justify-between mb-6">
+                    <span class="text-xs uppercase tracking-wider text-peach font-bold">Total Estimated Fee</span>
+                    <span class="text-2xl font-bold text-white" id="summary-grand-total">R1,700</span>
+                  </div>
+                  <a href="../contact.html" class="block w-full bg-peach hover:bg-peach-dark text-navy-950 font-bold py-3.5 px-6 rounded-xl transition shadow-lg text-center uppercase tracking-wider text-xs">
+                    Proceed to Contact & Book <i class="fa-solid fa-arrow-right ml-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-navy-950 text-gray-400 text-xs border-t border-white/10 py-10 mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p>© 2026 Adventure Escape SA. All rights reserved.</p>
+        <div class="flex flex-wrap items-center justify-center gap-6">
+          <a href="../fees.html" class="hover:text-white transition">Fees & Packages</a>
+          <a href="../contact.html" class="hover:text-white transition">Contact Us</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function selectPackage(packageName, price, defaultGuests) {
+        const select = document.getElementById('calc-package');
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].value === packageName) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+        document.getElementById('calc-guests').value = defaultGuests;
+        updateCalculation();
+        window.scrollTo({ top: document.body.scrollHeight * 0.2, behavior: 'smooth' });
+      }
+
+      function updateCalculation() {
+        const select = document.getElementById('calc-package');
+        const selectedOption = select.options[select.selectedIndex];
+        const basePrice = parseFloat(selectedOption.getAttribute('data-price') || 850);
+        const pkgName = selectedOption.value;
+
+        const guests = parseInt(document.getElementById('calc-guests').value) || 1;
+        let addonsTotal = 0;
+
+        if (document.getElementById('addon-shuttle').checked) {
+          addonsTotal += 250;
+        }
+        if (document.getElementById('addon-gear').checked) {
+          addonsTotal += (180 * guests);
+        }
+
+        const baseTotal = (pkgName === 'Private Group') ? basePrice : (basePrice * guests);
+        const grandTotal = baseTotal + addonsTotal;
+        const vat = grandTotal * 0.15;
+
+        document.getElementById('summary-pkg-name').textContent = pkgName;
+        document.getElementById('summary-base-total').textContent = `R${baseTotal.toLocaleString()}`;
+        document.getElementById('summary-guests-count').textContent = `${guests} Explorer${guests > 1 ? 's' : ''}`;
+        document.getElementById('summary-addons-total').textContent = `R${addonsTotal.toLocaleString()}`;
+        document.getElementById('summary-vat').textContent = `R${vat.toFixed(2)}`;
+        document.getElementById('summary-grand-total').textContent = `R${grandTotal.toLocaleString()}`;
+      }
+
+      window.onload = function() {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 3);
+        document.getElementById('calc-date').valueAsDate = tomorrow;
+        updateCalculation();
+      };
+    </script>
+  </body>
+</html>

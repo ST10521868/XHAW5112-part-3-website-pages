@@ -1,0 +1,257 @@
+﻿<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview - Adventure Escape SA</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display (Serif Titles) & Plus Jakarta Sans / Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slateNavy: {
+                            800: '#263644',
+                            900: '#2c3e4d',
+                            950: '#1e2b36',
+                        },
+                        peach: {
+                            DEFAULT: '#e59b58',
+                            hover: '#d88d49',
+                            badge: '#e8a268',
+                            light: '#fdf3eb',
+                        },
+                        sage: {
+                            600: '#5c736a',
+                            700: '#6e857b',
+                            800: '#53685e',
+                        },
+                        plum: {
+                            800: '#4a3d51',
+                            900: '#3d3242',
+                            950: '#2d2432',
+                        },
+                        cardBg: '#f3f5f6',
+                        tagEasy: '#38a169',
+                        tagEasyBg: '#e6fffa',
+                        tagMod: '#dd6b20',
+                        tagModBg: '#feebc8',
+                        tagHard: '#e53e3e',
+                        tagHardBg: '#fff5f5',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f3f5f6;
+            color: #2D3748;
+        }
+
+        .serif-title {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        /* Hero image blend and typography shadowing */
+        .hero-bg-overlay {
+            background: linear-gradient(180deg, rgba(44, 62, 77, 0.82) 0%, rgba(44, 62, 77, 0.94) 100%),
+                        url('https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&q=80&w=1800') center/cover no-repeat;
+        }
+
+        /* Active Filter Pill Styling */
+        .filter-pill {
+            transition: all 0.2s ease-in-out;
+        }
+        .filter-pill.active {
+            background-color: #2c3e4d;
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(44, 62, 77, 0.25);
+        }
+
+        /* Card transition effects */
+        .activity-card {
+            transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+        }
+        .activity-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Modal backdrop transition */
+        .modal-backdrop {
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        /* Custom scrollbar for clean aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2c3e4d;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-peach selection:text-white">
+
+    <header class="bg-slateNavy-900 text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <a href="home.html" class="flex items-center gap-3 group">
+                <div class="flex items-center gap-2">
+                    <!-- Mountain Logo Graphic -->
+                    <div class="w-10 h-10 bg-slateNavy-800 rounded-md border border-white/20 flex items-center justify-center p-1 relative overflow-hidden">
+                        <i class="fa-solid fa-mountain text-emerald-400 text-lg"></i>
+                        <i class="fa-solid fa-sun text-peach text-xs absolute top-1 right-1"></i>
+                    </div>
+                    <div>
+                        <span class="block text-sm font-extrabold tracking-wider uppercase text-white leading-none">ESCAPE SA</span>
+                        <div class="flex items-center gap-1 mt-1 opacity-75 text-[9px] text-gray-300">
+                            <i class="fa-solid fa-compass"></i>
+                            <i class="fa-solid fa-person-hiking"></i>
+                            <i class="fa-solid fa-water"></i>
+                            <i class="fa-solid fa-tree"></i>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="home.html" class="text-gray-300 hover:text-white transition">Home</a>
+                <a href="overview.html" class="text-white font-semibold relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-peach">Overview</a>
+                <a href="individual.html" class="text-gray-300 hover:text-white transition">Individual</a>
+                <a href="fees.html" class="text-gray-300 hover:text-white transition">Fees</a>
+                <a href="about.html" class="text-gray-300 hover:text-white transition">About Us</a>
+                <a href="contact.html" class="text-gray-300 hover:text-white transition">Contact Us</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden sm:block">
+                <button onclick="openBookingModal('General Booking')" class="bg-peach hover:bg-peach-hover text-slateNavy-900 font-bold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm hover:shadow-md">
+                    Book Now
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white p-2">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slateNavy-950 border-t border-white/10 px-4 pt-3 pb-6 space-y-3">
+            <a href="home.html" class="block text-gray-300 py-2 hover:text-white">Home</a>
+            <a href="overview.html" class="block text-peach font-semibold py-2">Overview</a>
+            <a href="individual.html" class="block text-gray-300 py-2 hover:text-white">Individual</a>
+            <a href="fees.html" class="block text-gray-300 py-2 hover:text-white">Fees</a>
+            <a href="about.html" class="block text-gray-300 py-2 hover:text-white">About Us</a>
+            <a href="contact.html" class="block text-gray-300 py-2 hover:text-white">Contact Us</a>
+            <button onclick="openBookingModal('General Booking')" class="w-full text-center bg-peach text-slateNavy-900 font-bold py-2.5 rounded-full mt-2">Book Now</button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="hero-bg-overlay text-white pt-12 pb-16 px-4 sm:px-6 lg:px-8 relative">
+            <div class="max-w-7xl mx-auto">
+                <!-- Breadcrumbs -->
+                <nav class="flex text-xs font-medium text-gray-300 mb-6 space-x-2 items-center">
+                    <a href="home.html" class="hover:underline opacity-80 hover:opacity-100">Home</a>
+                    <span class="opacity-40"><i class="fa-solid fa-chevron-right text-[9px]"></i></span>
+                    <span class="text-white font-semibold">Overview</span>
+                </nav>
+
+                <!-- Main Hero Heading -->
+                <h1 class="serif-title text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4">
+                    Explore Our Adventures
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-gray-200 text-base sm:text-lg max-w-2xl font-light leading-relaxed mb-12">
+                    Discover thrilling outdoor experiences across South Africa's most spectacular landscapes.
+                </p>
+
+                <!-- Statistics Bar -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-white/15 text-center">
+                    <div class="space-y-1">
+                        <div class="serif-title text-3xl sm:text-4xl font-bold text-peach">12+</div>
+                        <div class="text-[11px] font-bold text-gray-300 tracking-wider uppercase">ACTIVITIES</div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="serif-title text-3xl sm:text-4xl font-bold text-peach">6</div>
+                        <div class="text-[11px] font-bold text-gray-300 tracking-wider uppercase">REGIONS</div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="serif-title text-3xl sm:text-4xl font-bold text-peach">4 800+</div>
+                        <div class="text-[11px] font-bold text-gray-300 tracking-wider uppercase">HAPPY ADVENTURERS</div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="serif-title text-3xl sm:text-4xl font-bold text-peach">98%</div>
+                        <div class="text-[11px] font-bold text-gray-300 tracking-wider uppercase">SATISFACTION RATE</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-10">
+                    <p class="text-xs font-bold uppercase tracking-[0.24em] text-peach">2. Project Overview</p>
+                    <h2 class="serif-title text-3xl sm:text-4xl lg:text-5xl font-bold text-slateNavy-900 mt-3 leading-tight">
+                        Built to match how travellers explore South Africa.
+                    </h2>
+                </div>
+
+                <div class="grid gap-6 md:grid-cols-3">
+                    <article class="rounded-3xl bg-slate-50 border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-2xl bg-peach-light flex items-center justify-center text-peach mb-4">
+                            <i class="fa-solid fa-route text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slateNavy-900 mb-3">Experience-led planning</h3>
+                        <p class="text-sm leading-7 text-slate-600">
+                            Every journey is designed around real routes, mind blowing stops and memorable access to the landscape.
+                        </p>
+                    </article>
+
+                    <article class="rounded-3xl bg-slate-50 border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-2xl bg-peach-light flex items-center justify-center text-peach mb-4">
+                            <i class="fa-solid fa-wallet text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slateNavy-900 mb-3">Transparent pricing</h3>
+                        <p class="text-sm leading-7 text-slate-600">
+                            Clear pricing and package options help visitors understand what is included before they commit to a trip or group booking.
+                        </p>
+                    </article>
+
+                    <article class="rounded-3xl bg-slate-50 border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-2xl bg-peach-light flex items-center justify-center text-peach mb-4">
+                            <i class="fa-solid fa-handshake-angle text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slateNavy-900 mb-3">Trusted local support</h3>
+                        <p class="text-sm leading-7 text-slate-600">
+                            Local knowledge, guided support and seamless communication keep each excursion comfortable, safe and easy to enjoy.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        
